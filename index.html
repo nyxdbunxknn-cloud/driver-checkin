@@ -6,34 +6,114 @@
   <title>ระบบเช็คอิน พขร.</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f9; }
-    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    button { width: 100%; padding: 15px; margin: 10px 0; font-size: 16px; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; }
-    .btn-start { background-color: #28a745; }
-    .btn-arrive { background-color: #007bff; }
-    .btn-return { background-color: #ffc107; color: #333; }
+    body { font-family: sans-serif; text-align: center; padding: 15px; background: #f4f4f9; }
+    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 400px; margin: 0 auto; }
+    .form-group { text-align: left; margin-bottom: 12px; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; color: #333; }
+    select { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; background: #fff; box-sizing: border-box; }
+    button { width: 100%; padding: 14px; margin: 8px 0; font-size: 16px; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    .btn-1 { background-color: #28a745; } /* ออกเดินทาง */
+    .btn-2 { background-color: #17a2b8; } /* ถึงคลังรับสินค้า */
+    .btn-3 { background-color: #007bff; } /* ถึงสถานที่รับสินค้า */
+    .btn-4 { background-color: #6c757d; } /* ถึงลานจอด */
   </style>
 </head>
 <body>
   <div class="card">
     <h2>บันทึกสถานะการเดินทาง</h2>
-    <p id="user-name">กำลังโหลดข้อมูลผู้ใช้...</p>
+    <p id="user-name" style="color: #666; font-weight: bold;">กำลังโหลดข้อมูลผู้ใช้...</p>
     
-    <button class="btn-start" onclick="sendCheckin('ออกเดินทาง')">🚚 ออกเดินทาง</button>
-    <button class="btn-arrive" onclick="sendCheckin('ถึงสถานที่ลูกค้า')">📍 ถึงสถานที่ลูกค้า</button>
-    <button class="btn-return" onclick="sendCheckin('เดินทางกลับ')">🏠 เดินทางกลับ</button>
+    <!-- ทะเบียนหัว -->
+    <div class="form-group">
+      <label for="head-plate">🚛 ทะเบียนหัว:</label>
+      <select id="head-plate">
+        <option value="">-- เลือกทะเบียนหัว --</option>
+        <option value="71-1077">71-1077</option>
+        <option value="71-2944">71-2944</option>
+        <option value="70-9570">70-9570</option>
+        <option value="70-8303">70-8303</option>
+        <option value="71-7049">71-7049</option>
+        <option value="70-8204">70-8204</option>
+        <option value="71-5834">71-5834</option>
+        <option value="71-4064">71-4064</option>
+        <option value="71-4803">71-4803</option>
+        <option value="71-4063">71-4063</option>
+        <option value="70-8259">70-8259</option>
+        <option value="70-8260">70-8260</option>
+        <option value="71-1154">71-1154</option>
+        <option value="71-3608">71-3608</option>
+        <option value="71-3609">71-3609</option>
+        <option value="71-7947">71-7947</option>
+        <option value="71-7948">71-7948</option>
+        <option value="70-9688">70-9688</option>
+        <option value="70-8228">70-8228</option>
+        <option value="71-3940">71-3940</option>
+        <option value="71-3942">71-3942</option>
+        <option value="70-8295">70-8295</option>
+        <option value="71-7092">71-7092</option>
+        <option value="70-8983">70-8983</option>
+        <option value="70-8218">70-8218</option>
+        <option value="71-3070">71-3070</option>
+        <option value="70-8981">70-8981</option>
+        <option value="70-9006">70-9006</option>
+        <option value="70-8200">70-8200</option>
+        <option value="70-8226">70-8226</option>
+        <option value="71-7054">71-7054</option>
+        <option value="71-7087">71-7087</option>
+      </select>
+    </div>
+
+    <!-- ทะเบียนหาง -->
+    <div class="form-group">
+      <label for="tail-plate">อย ทะเบียนหาง:</label>
+      <select id="tail-plate">
+        <option value="">-- เลือกทะเบียนหาง --</option>
+        <option value="71-3941">71-3941</option>
+        <option value="71-3068">71-3068</option>
+        <option value="71-1080">71-1080</option>
+        <option value="71-5777">71-5777</option>
+        <option value="71-3943">71-3943</option>
+        <option value="71-3071">71-3071</option>
+        <option value="71-1078">71-1078</option>
+        <option value="71-0454">71-0454</option>
+        <option value="71-5776">71-5776</option>
+        <option value="71-3285">71-3285</option>
+        <option value="71-8314">71-8314</option>
+        <option value="71-8313">71-8313</option>
+        <option value="70-8229">70-8229</option>
+        <option value="70-8296">70-8296</option>
+        <option value="71-7093">71-7093</option>
+        <option value="70-8184">70-8184</option>
+        <option value="70-8133">70-8133</option>
+        <option value="70-8123">70-8123</option>
+        <option value="70-8219">70-8219</option>
+        <option value="70-8139">70-8139</option>
+        <option value="70-8201">70-8201</option>
+        <option value="70-8225">70-8225</option>
+        <option value="70-8193">70-8193</option>
+        <option value="71-8088">71-8088</option>
+        <option value="70-8137">70-8137</option>
+      </select>
+    </div>
+
+    <label style="text-align: left; margin-top: 15px;">📍 เลือกสถานะที่ต้องการเช็คอิน:</label>
+    <button class="btn-1" onclick="sendCheckin('ออกเดินทาง')">🚚 ออกเดินทาง</button>
+    <button class="btn-2" onclick="sendCheckin('ถึงคลังรับสินค้า')">🏭 ถึงคลังรับสินค้า</button>
+    <button class="btn-3" onclick="sendCheckin('ถึงสถานที่รับสินค้า')">🏢 ถึงสถานที่รับสินค้า</button>
+    <button class="btn-4" onclick="sendCheckin('ถึงลานจอด')">🅿️ ถึงลานจอด</button>
   </div>
 
   <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbwML30EotwbjpTx6vDWB6lY4zA2NRdpejhUUcoee1voQloCgfvlP9PabY6gdSSDjGM/exec";
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbz_1JVb0PbUQxu8jtKcXNSBuhrQkUjdh7OODC103CxF8RPNKzg3VOdqSG2D4C-sUcdY/exec";
+    const MY_LIFF_ID = "2011023562-ouJgJlYP";
     let currentUserName = "";
 
     async function main() {
-      await liff.init({ liffId: "2011023562-ouJgJlYP" });
+      await liff.init({ liffId: MY_LIFF_ID });
       if (liff.isLoggedIn()) {
         const profile = await liff.getProfile();
         currentUserName = profile.displayName;
-        document.getElementById('user-name').innerText = "สวัสดี: " + currentUserName;
+        document.getElementById('user-name').innerText = "ผู้ใช้งาน: " + currentUserName;
       } else {
         liff.login();
       }
@@ -41,6 +121,18 @@
     main();
 
     function sendCheckin(status) {
+      const selectedHead = document.getElementById('head-plate').value;
+      const selectedTail = document.getElementById('tail-plate').value;
+      
+      if (!selectedHead) {
+        alert("กรุณาเลือกทะเบียนหัวก่อนกดเช็คอินครับ!");
+        return;
+      }
+      if (!selectedTail) {
+        alert("กรุณาเลือกทะเบียนหางก่อนกดเช็คอินครับ!");
+        return;
+      }
+
       if (!navigator.geolocation) {
         alert("เบราว์เซอร์ไม่รองรับการดึงพิกัด GPS");
         return;
@@ -49,6 +141,8 @@
       navigator.geolocation.getCurrentPosition(async (position) => {
         const payload = {
           driverName: currentUserName,
+          headPlate: selectedHead,
+          tailPlate: selectedTail,
           status: status,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
@@ -59,7 +153,7 @@
             method: "POST",
             body: JSON.stringify(payload)
           });
-          alert("บันทึกสถานะ [" + status + "] เรียบร้อยแล้ว!");
+          alert("บันทึกสถานะ [" + status + "]\nหัว: " + selectedHead + " | หาง: " + selectedTail + "\nเรียบร้อยแล้ว!");
           liff.closeWindow();
         } catch (err) {
           alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
