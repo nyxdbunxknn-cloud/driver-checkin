@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบเช็คอิน พขร.</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f9; }
+    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    button { width: 100%; padding: 15px; margin: 10px 0; font-size: 16px; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    .btn-start { background-color: #28a745; }
+    .btn-arrive { background-color: #007bff; }
+    .btn-return { background-color: #ffc107; color: #333; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>บันทึกสถานะการเดินทาง</h2>
+    <p id="user-name">กำลังโหลดข้อมูลผู้ใช้...</p>
+    
+    <button class="btn-start" onclick="sendCheckin('ออกเดินทาง')">🚚 ออกเดินทาง</button>
+    <button class="btn-arrive" onclick="sendCheckin('ถึงสถานที่ลูกค้า')">📍 ถึงสถานที่ลูกค้า</button>
+    <button class="btn-return" onclick="sendCheckin('เดินทางกลับ')">🏠 เดินทางกลับ</button>
+  </div>
+
+  <script>
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbwML30EotwbjpTx6vDWB6lY4zA2NRdpejhUUcoee1voQloCgfvlP9PabY6gdSSDjGM/exec";
+    let currentUserName = "";
+
+    async function main() {
+      await liff.init({ liffId: "วาง_LIFF_ID_ตรงนี้" });
+      if (liff.isLoggedIn()) {
+        const profile = await liff.getProfile();
+        currentUserName = profile.displayName;
+        document.getElementById('user-name').innerText = "สวัสดี: " + currentUserName;
+      } else {
+        liff.login();
+      }
+    }
+    main();
+
+    function sendCheckin(status) {
+      if (!navigator.geolocation) {
+        alert("เบราว์เซอร์ไม่รองรับการดึงพิกัด GPS");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const payload = {
+          driverName: currentUserName,
+          status: status,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        };
+
+        try {
+          await fetch(GAS_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+          alert("บันทึกสถานะ [" + status + "] เรียบร้อยแล้ว!");
+          liff.closeWindow();
+        } catch (err) {
+          alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+        }
+      }, (error) => {
+        alert("กรุณาเปิด GPS และอนุญาตให้เข้าถึงตำแหน่ง");
+      });
+    }
+  </script>
+</body>
+</html>
