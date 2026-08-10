@@ -10,126 +10,92 @@
     .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 400px; margin: 0 auto; }
     .form-group { text-align: left; margin-bottom: 12px; }
     label { font-weight: bold; display: block; margin-bottom: 5px; color: #333; }
-    select { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; background: #fff; box-sizing: border-box; }
-    button { width: 100%; padding: 14px; margin: 8px 0; font-size: 16px; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; }
-    .btn-1 { background-color: #28a745; } /* ออกเดินทาง */
-    .btn-2 { background-color: #17a2b8; } /* ถึงคลังรับสินค้า */
-    .btn-3 { background-color: #007bff; } /* ถึงสถานที่รับสินค้า */
-    .btn-4 { background-color: #6c757d; } /* ถึงลานจอด */
+    input[type="text"] { width: 100%; padding: 12px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; background: #fff; box-sizing: border-box; }
+    button { width: 100%; padding: 14px; margin: 8px 0; font-size: 16px; font-weight: bold; color: white; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.2s; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-1 { background-color: #28a745; }
+    .btn-2 { background-color: #17a2b8; }
+    .btn-3 { background-color: #007bff; }
+    .btn-4 { background-color: #6c757d; }
+    
+    #status-loading {
+      display: none;
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>บันทึกสถานะการเดินทาง</h2>
-    <p id="user-name" style="color: #666; font-weight: bold;">กำลังโหลดข้อมูลผู้ใช้...</p>
     
-    <!-- ทะเบียนหัว -->
     <div class="form-group">
-      <label for="head-plate">🚛 ทะเบียนหัว:</label>
-      <select id="head-plate">
-        <option value="">-- เลือกทะเบียนหัว --</option>
-        <option value="71-1077">71-1077</option>
-        <option value="71-2944">71-2944</option>
-        <option value="70-9570">70-9570</option>
-        <option value="70-8303">70-8303</option>
-        <option value="71-7049">71-7049</option>
-        <option value="70-8204">70-8204</option>
-        <option value="71-5834">71-5834</option>
-        <option value="71-4064">71-4064</option>
-        <option value="71-4803">71-4803</option>
-        <option value="71-4063">71-4063</option>
-        <option value="70-8259">70-8259</option>
-        <option value="70-8260">70-8260</option>
-        <option value="71-1154">71-1154</option>
-        <option value="71-3608">71-3608</option>
-        <option value="71-3609">71-3609</option>
-        <option value="71-7947">71-7947</option>
-        <option value="71-7948">71-7948</option>
-        <option value="70-9688">70-9688</option>
-        <option value="70-8228">70-8228</option>
-        <option value="71-3940">71-3940</option>
-        <option value="71-3942">71-3942</option>
-        <option value="70-8295">70-8295</option>
-        <option value="71-7092">71-7092</option>
-        <option value="70-8983">70-8983</option>
-        <option value="70-8218">70-8218</option>
-        <option value="71-3070">71-3070</option>
-        <option value="70-8981">70-8981</option>
-        <option value="70-9006">70-9006</option>
-        <option value="70-8200">70-8200</option>
-        <option value="70-8226">70-8226</option>
-        <option value="71-7054">71-7054</option>
-        <option value="71-7087">71-7087</option>
-      </select>
+      <label for="driver-name">👤 ชื่อ / รหัส พขร.:</label>
+      <input type="text" id="driver-name" placeholder="พิมพ์ชื่อ หรือ รหัส พขร.">
     </div>
 
-    <!-- ทะเบียนหาง -->
     <div class="form-group">
-      <label for="tail-plate">อย ทะเบียนหาง:</label>
-      <select id="tail-plate">
-        <option value="">-- เลือกทะเบียนหาง --</option>
-        <option value="71-3941">71-3941</option>
-        <option value="71-3068">71-3068</option>
-        <option value="71-1080">71-1080</option>
-        <option value="71-5777">71-5777</option>
-        <option value="71-3943">71-3943</option>
-        <option value="71-3071">71-3071</option>
-        <option value="71-1078">71-1078</option>
-        <option value="71-0454">71-0454</option>
-        <option value="71-5776">71-5776</option>
-        <option value="71-3285">71-3285</option>
-        <option value="71-8314">71-8314</option>
-        <option value="71-8313">71-8313</option>
-        <option value="70-8229">70-8229</option>
-        <option value="70-8296">70-8296</option>
-        <option value="71-7093">71-7093</option>
-        <option value="70-8184">70-8184</option>
-        <option value="70-8133">70-8133</option>
-        <option value="70-8123">70-8123</option>
-        <option value="70-8219">70-8219</option>
-        <option value="70-8139">70-8139</option>
-        <option value="70-8201">70-8201</option>
-        <option value="70-8225">70-8225</option>
-        <option value="70-8193">70-8193</option>
-        <option value="71-8088">71-8088</option>
-        <option value="70-8137">70-8137</option>
-      </select>
+      <label for="head-plate">🚛 ทะเบียนหัว:</label>
+      <input type="text" id="head-plate" placeholder="พิมพ์ทะเบียนหัว เช่น 71-1077">
+    </div>
+
+    <div class="form-group">
+      <label for="tail-plate">🚚 ทะเบียนหาง:</label>
+      <input type="text" id="tail-plate" placeholder="พิมพ์ทะเบียนหาง เช่น 71-3941">
+    </div>
+
+    <div class="form-group">
+      <label for="cargo-type">📦 ประเภทสินค้า:</label>
+      <input type="text" id="cargo-type" placeholder="พิมพ์ประเภทสินค้า เช่น สินค้าทั่วไป, เหล็ก">
     </div>
 
     <label style="text-align: left; margin-top: 15px;">📍 เลือกสถานะที่ต้องการเช็คอิน:</label>
-    <button class="btn-1" onclick="sendCheckin('ออกเดินทาง')">🚚 ออกเดินทาง</button>
-    <button class="btn-2" onclick="sendCheckin('ถึงคลังรับสินค้า')">🏭 ถึงคลังรับสินค้า</button>
-    <button class="btn-3" onclick="sendCheckin('ถึงสถานที่รับสินค้า')">🏢 ถึงสถานที่รับสินค้า</button>
-    <button class="btn-4" onclick="sendCheckin('ถึงลานจอด')">🅿️ ถึงลานจอด</button>
+    <button class="btn-1 action-btn" onclick="sendCheckin('ออกเดินทาง')">🚚 ออกเดินทาง</button>
+    <button class="btn-2 action-btn" onclick="sendCheckin('ถึงคลังรับสินค้า')">🏭 ถึงคลังรับสินค้า</button>
+    <button class="btn-3 action-btn" onclick="sendCheckin('ถึงสถานที่ปลายทาง')">🏢 ถึงสถานที่ปลายทาง</button>
+    <button class="btn-4 action-btn" onclick="sendCheckin('ถึงลานจอด')">🅿️ ถึงลานจอด</button>
+
+    <div id="status-loading">⏳ กำลังจับพิกัด GPS และส่งข้อมูล...</div>
   </div>
 
   <script>
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbz_1JVb0PbUQxu8jtKcXNSBuhrQkUjdh7OODC103CxF8RPNKzg3VOdqSG2D4C-sUcdY/exec";
-    const MY_LIFF_ID = "2011023562-ouJgJlYP";
-    let currentUserName = "";
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbwSoKKGTiKVzVvlgWb5YvVWVh_w33MEocoKP_yrpsfhj3ghSK10VvqJcUDbuPV9oPt4/exec";
+    const MY_LIFF_ID = "วาง_LIFF_ID_จาก_STEP_3_ตรงนี้";
 
     async function main() {
       await liff.init({ liffId: MY_LIFF_ID });
-      if (liff.isLoggedIn()) {
-        const profile = await liff.getProfile();
-        currentUserName = profile.displayName;
-        document.getElementById('user-name').innerText = "ผู้ใช้งาน: " + currentUserName;
-      } else {
+      if (!liff.isLoggedIn()) {
         liff.login();
       }
     }
     main();
 
+    function toggleButtons(disable) {
+      const buttons = document.querySelectorAll('.action-btn');
+      buttons.forEach(btn => btn.disabled = disable);
+      document.getElementById('status-loading').style.display = disable ? 'block' : 'none';
+    }
+
     function sendCheckin(status) {
-      const selectedHead = document.getElementById('head-plate').value;
-      const selectedTail = document.getElementById('tail-plate').value;
+      const driverName = document.getElementById('driver-name').value.trim();
+      const selectedHead = document.getElementById('head-plate').value.trim();
+      const selectedTail = document.getElementById('tail-plate').value.trim();
+      const cargoType = document.getElementById('cargo-type').value.trim();
       
+      if (!driverName) {
+        alert("กรุณากรอกชื่อ/รหัส พขร. ก่อนกดเช็คอินครับ!");
+        return;
+      }
       if (!selectedHead) {
-        alert("กรุณาเลือกทะเบียนหัวก่อนกดเช็คอินครับ!");
+        alert("กรุณากรอกทะเบียนหัวก่อนกดเช็คอินครับ!");
         return;
       }
       if (!selectedTail) {
-        alert("กรุณาเลือกทะเบียนหางก่อนกดเช็คอินครับ!");
+        alert("กรุณากรอกทะเบียนหางก่อนกดเช็คอินครับ!");
         return;
       }
 
@@ -138,29 +104,43 @@
         return;
       }
 
+      toggleButtons(true);
+
+      const options = {
+        enableHighAccuracy: false,
+        timeout: 8000,
+        maximumAge: 30000
+      };
+
       navigator.geolocation.getCurrentPosition(async (position) => {
         const payload = {
-          driverName: currentUserName,
+          driverName: driverName,
           headPlate: selectedHead,
           tailPlate: selectedTail,
+          cargoType: cargoType,
           status: status,
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         };
 
         try {
-          await fetch(GAS_URL, {
+          fetch(GAS_URL, {
             method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           });
-          alert("บันทึกสถานะ [" + status + "]\nหัว: " + selectedHead + " | หาง: " + selectedTail + "\nเรียบร้อยแล้ว!");
+
+          alert("บันทึกสถานะ [" + status + "]\nพขร.: " + driverName + "\nเรียบร้อยแล้ว!");
           liff.closeWindow();
         } catch (err) {
           alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+          toggleButtons(false);
         }
       }, (error) => {
-        alert("กรุณาเปิด GPS และอนุญาตให้เข้าถึงตำแหน่ง");
-      });
+        alert("ไม่สามารถดึงตำแหน่ง GPS ได้ กรุณาเปิด GPS และลองใหม่อีกครั้ง");
+        toggleButtons(false);
+      }, options);
     }
   </script>
 </body>
